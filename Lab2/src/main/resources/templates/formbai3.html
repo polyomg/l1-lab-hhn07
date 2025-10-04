@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Form Bai3</title>
+</head>
+<body>
+<h2>Form nhập sản phẩm</h2>
+<form th:action="@{/savebai3}" th:object="${product}" method="post">
+    Tên: <input type="text" th:field="*{name}"><br>
+    Giá: <input type="number" th:field="*{price}"><br>
+    <button type="submit">Lưu</button>
+</form>
+
+<h3>Thông tin sản phẩm:</h3>
+<ul>
+    <li th:text="${product.name}">Tên SP</li>
+    <li th:text="${product.price}">Giá SP</li>
+</ul>
+</body>
+</html>
