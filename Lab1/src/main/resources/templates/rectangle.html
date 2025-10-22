@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tính HCN</title>
+</head>
+<body>
+  <h2>Tính diện tích và chu vi hình chữ nhật</h2>
+
+  <form th:action="@{/rectangle/calc}" method="post">
+    <label>Chiều dài:
+      <input type="number" name="length" step="any" required th:value="${length}"/>
+    </label><br><br>
+
+    <label>Chiều rộng:
+      <input type="number" name="width" step="any" required th:value="${width}"/>
+    </label><br><br>
+
+    <button type="submit">Tính</button>
+  </form>
+
+  <div th:if="${error}" style="color:red; margin-top:12px;">
+    <p th:text="${error}"></p>
+  </div>
+
+  <div th:if="${area != null}" style="margin-top:12px;">
+    <p>Diện tích = <strong th:text="${area}"></strong></p>
+    <p>Chu vi = <strong th:text="${perimeter}"></strong></p>
+  </div>
+</body>
+</html>

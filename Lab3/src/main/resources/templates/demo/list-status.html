@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff List Status</title>
+</head>
+<body>
+    <h2>Thông tin trạng thái phần tử trong danh sách</h2>
+    <table border="1" style="width:100%; text-align:center; border-collapse:collapse;">
+        <thead>
+            <tr>
+                <th rowspan="2">HỌ VÀ TÊN</th>
+                <th colspan="6">CÁC THUỘC TÍNH TRẠNG THÁI</th>
+            </tr>
+            <tr>
+                <th>Index</th>
+                <th>Count</th>
+                <th>First</th>
+                <th>Last</th>
+                <th>Odd</th>
+                <th>Even</th>
+            </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="staff, st : ${list}">
+                <tr th:style="@{|background-color:${st.odd?'pink':'cyan'}|}">
+                    <!-- Họ và tên viết hoa chữ cái đầu -->
+                    <td th:text="${#strings.capitalizeWords(staff.fullname)}"></td>
+
+                    <!-- index: bắt đầu từ 0 -->
+                    <td th:text="${st.index}"></td>
+
+                    <!-- count: bắt đầu từ 1 -->
+                    <td th:text="${st.count}"></td>
+
+                    <!-- phần tử đầu tiên -->
+                    <td th:text="${st.first}"></td>
+
+                    <!-- phần tử cuối cùng -->
+                    <td th:text="${st.last}"></td>
+
+                    <!-- phần tử lẻ -->
+                    <td th:text="${st.odd}"></td>
+
+                    <!-- phần tử chẵn -->
+                    <td th:text="${st.even}"></td>
+                </tr>
+            </th:block>
+        </tbody>
+    </table>
+</body>
+</html>
