@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gửi Email</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            margin: 30px;
+        }
+        form {
+            width: 600px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #ccc;
+            margin: auto;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+        }
+        button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #fff;
+        }
+        .btn-send { background: #28a745; }
+        .btn-queue { background: #007bff; }
+        .message {
+            color: green;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<h2 style="text-align:center;">📧 Gửi Email</h2>
+<form th:action="@{/mail/send}" method="post" th:object="${mail}">
+    <div class="message" th:text="${message}"></div>
+
+    <label>From:</label>
+    <input type="email" th:field="*{from}" required>
+
+    <label>To:</label>
+    <input type="text" th:field="*{to}" placeholder="VD: abc@gmail.com" required>
+
+    <label>Cc:</label>
+    <input type="text" th:field="*{cc}" placeholder="Có thể bỏ trống">
+
+    <label>Bcc:</label>
+    <input type="text" th:field="*{bcc}" placeholder="Có thể bỏ trống">
+
+    <label>Subject:</label>
+    <input type="text" th:field="*{subject}" required>
+
+    <label>Body:</label>
+    <textarea th:field="*{body}" rows="6"></textarea>
+
+    <label>File đính kèm:</label>
+    <input type="text" th:field="*{filenames}" placeholder="Nhập đường dẫn file, cách nhau bằng dấu ,">
+
+    <button class="btn-send" type="submit">Gửi Trực Tiếp</button>
+</form>
+
+<form th:action="@{/mail/push}" method="post" th:object="${mail}" style="width:600px;margin:10px auto;">
+    <input type="hidden" th:field="*{from}">
+    <input type="hidden" th:field="*{to}">
+    <input type="hidden" th:field="*{cc}">
+    <input type="hidden" th:field="*{bcc}">
+    <input type="hidden" th:field="*{subject}">
+    <input type="hidden" th:field="*{body}">
+    <input type="hidden" th:field="*{filenames}">
+    <button class="btn-queue" type="submit">Xếp vào hàng đợi</button>
+</form>
+</body>
+</html>
